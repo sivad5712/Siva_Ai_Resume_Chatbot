@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Siva D - Senior Software Engineer Resume</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --primary: #4f46e5;
+      --primary-dark: #3730a3;
+      --primary-light: #e0e7ff;
+      --text-main: #1f2937;
+      --text-muted: #4b5563;
+      --text-light: #9ca3af;
+      --bg-main: #f9fafb;
+      --bg-card: #ffffff;
+      --border: #e5e7eb;
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      color: var(--text-main);
+      background-color: var(--bg-main);
+      line-height: 1.6;
+      padding-bottom: 60px;
+    }
+
+    /* Interactive Top Action Bar (Hidden on print) */
+    .action-bar {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 12px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: var(--shadow-sm);
+      max-width: 100%;
+      margin-bottom: 30px;
+    }
+
+    .brand {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .brand-icon {
+      width: 24px;
+      height: 24px;
+      background: linear-gradient(135deg, var(--primary), #818cf8);
+      border-radius: 6px;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 800;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 12px;
+    }
+
+    .btn {
+      padding: 8px 16px;
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: 1px solid transparent;
+    }
+
+    .btn-primary {
+      background-color: var(--primary);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-dark);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background-color: var(--bg-card);
+      color: var(--text-muted);
+      border-color: var(--border);
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      transform: translateY(-1px);
+    }
+
+    /* Resume Container */
+    .resume-container {
+      max-width: 850px;
+      margin: 0 auto;
+      background-color: var(--bg-card);
+      padding: 50px 60px;
+      border-radius: 12px;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border);
+    }
+
+    /* Header styling */
+    .resume-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      border-bottom: 2px solid var(--primary-light);
+      padding-bottom: 30px;
+      margin-bottom: 30px;
+    }
+
+    .header-left h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      color: var(--text-main);
+      line-height: 1.1;
+      margin-bottom: 6px;
+    }
+
+    .header-left .title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--primary);
+      letter-spacing: -0.01em;
+    }
+
+    .header-right {
+      text-align: right;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+
+    .contact-item a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+
+    .contact-item a:hover {
+      color: var(--primary);
+    }
+
+    .contact-icon {
+      width: 14px;
+      height: 14px;
+      color: var(--primary);
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    /* Section styling */
+    .resume-section {
+      margin-bottom: 30px;
+    }
+
+    .section-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--primary-dark);
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background-color: var(--border);
+    }
+
+    .summary-text {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      text-align: justify;
+      line-height: 1.6;
+    }
+
+    /* Skills Grid */
+    .skills-container {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 15px;
+    }
+
+    .skills-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 15px;
+      font-size: 0.9rem;
+    }
+
+    .skills-category {
+      font-weight: 600;
+      color: var(--text-main);
+      width: 180px;
+      min-width: 180px;
+      font-size: 0.9rem;
+    }
+
+    .skills-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .skill-badge {
+      background-color: var(--bg-main);
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+      padding: 2px 10px;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      transition: all 0.15s ease;
+    }
+
+    .skill-badge:hover {
+      background-color: var(--primary-light);
+      color: var(--primary-dark);
+      border-color: rgba(79, 70, 229, 0.2);
+    }
+
+    /* Experience styling */
+    .job-item {
+      margin-bottom: 28px;
+    }
+
+    .job-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .job-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 8px;
+    }
+
+    .job-role {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .job-company {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .job-meta {
+      font-size: 0.85rem;
+      color: var(--text-light);
+      text-align: right;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+    }
+
+    .job-duration {
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .job-highlights {
+      list-style-type: none;
+      padding-left: 0;
+    }
+
+    .job-highlights li {
+      position: relative;
+      padding-left: 20px;
+      margin-bottom: 6px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .job-highlights li::before {
+      content: "•";
+      color: var(--primary);
+      font-weight: bold;
+      font-size: 1.2rem;
+      position: absolute;
+      left: 6px;
+      top: -2px;
+    }
+
+    /* Projects styling */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .project-card {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 18px;
+      background-color: var(--bg-main);
+      transition: all 0.2s ease;
+    }
+
+    .project-card:hover {
+      border-color: rgba(79, 70, 229, 0.3);
+      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.05);
+      background-color: var(--bg-card);
+    }
+
+    .project-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 4px;
+    }
+
+    .project-role {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 10px;
+    }
+
+    .project-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+
+    .project-tag {
+      background-color: rgba(79, 70, 229, 0.06);
+      color: var(--primary-dark);
+      border: 1px solid rgba(79, 70, 229, 0.1);
+      font-size: 0.75rem;
+      padding: 1px 6px;
+      border-radius: 3px;
+      font-weight: 500;
+    }
+
+    /* Two Columns Section (Certifications & Education) */
+    .two-cols {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 30px;
+    }
+
+    .cert-item {
+      margin-bottom: 12px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 500;
+    }
+
+    .cert-icon {
+      color: var(--primary);
+      flex-shrink: 0;
+    }
+
+    .edu-item h4 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .edu-school {
+      font-size: 0.85rem;
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .edu-year {
+      font-size: 0.85rem;
+      color: var(--text-light);
+    }
+
+    /* Print styling rules */
+    @media print {
+      body {
+        background-color: #ffffff;
+        color: #000000;
+        padding-bottom: 0;
+      }
+
+      .action-bar {
+        display: none !important;
+      }
+
+      .resume-container {
+        box-shadow: none !important;
+        border: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        max-width: 100% !important;
+        background-color: #ffffff !important;
+      }
+
+      .btn {
+        display: none !important;
+      }
+
+      .skill-badge {
+        border: 1px solid #ccc !important;
+        background: #fff !important;
+        color: #333 !important;
+      }
+
+      .project-card {
+        background: #fff !important;
+        border: 1px solid #ddd !important;
+        page-break-inside: avoid;
+      }
+
+      .job-item {
+        page-break-inside: avoid;
+      }
+
+      .resume-section {
+        page-break-inside: avoid;
+      }
+
+      a {
+        text-decoration: none !important;
+        color: #000 !important;
+      }
+
+      .contact-item a:hover {
+        color: #000 !important;
+      }
+    }
+
+    /* Mobile Responsive styling */
+    @media (max-width: 768px) {
+      body {
+        padding-bottom: 30px;
+      }
+      
+      .action-bar {
+        padding: 10px 15px;
+      }
+
+      .resume-container {
+        padding: 24px;
+        margin: 0 10px;
+        border-radius: 8px;
+      }
+
+      .resume-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+      }
+
+      .header-right {
+        text-align: left;
+        align-items: flex-start;
+        width: 100%;
+        border-top: 1px solid var(--border);
+        padding-top: 15px;
+      }
+
+      .contact-item {
+        justify-content: flex-start;
+      }
+
+      .skills-row {
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .skills-category {
+        width: 100%;
+        min-width: unset;
+      }
+
+      .job-header {
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .job-meta {
+        text-align: left;
+        align-items: flex-start;
+      }
+
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .two-cols {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Action Bar (Hidden on print) -->
+  <div class="action-bar">
+    <div class="brand">
+      <div class="brand-icon">S</div>
+      <span>Siva D - Senior Software Engineer Resume</span>
+    </div>
+    <div class="action-buttons">
+      <a href="/" class="btn btn-secondary">
+        <!-- Arrow Left SVG -->
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        Back to Assistant
+      </a>
+      <button onclick="window.print()" class="btn btn-primary">
+        <!-- Print SVG -->
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+        Print / Save PDF
+      </button>
+    </div>
+  </div>
+
+  <!-- Main Resume Content -->
+  <div class="resume-container">
+    
+    <!-- Header -->
+    <header class="resume-header">
+      <div class="header-left">
+        <h1>Siva D</h1>
+        <div class="title">Senior Software Engineer</div>
+      </div>
+      <div class="header-right">
+        <div class="contact-item">
+          <!-- Phone SVG -->
+          <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <a href="tel:+16146649498">+1 (614) 664-9498</a>
+        </div>
+        <div class="contact-item">
+          <!-- Email SVG -->
+          <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+          <a href="mailto:Sivad5712@gmail.com">Sivad5712@gmail.com</a>
+        </div>
+        <div class="contact-item">
+          <!-- LinkedIn SVG -->
+          <svg class="contact-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.779-1.75-1.75s.784-1.75 1.75-1.75 1.75.779 1.75 1.75-.784 1.75-1.75 1.75zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+          <a href="https://www.linkedin.com/in/sivad571/" target="_blank" rel="noopener noreferrer">linkedin.com/in/sivad571</a>
+        </div>
+        <div class="contact-item">
+          <!-- GitHub SVG -->
+          <svg class="contact-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.579.688.481C19.137 20.162 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+          <a href="https://github.com/sivad5712" target="_blank" rel="noopener noreferrer">github.com/sivad5712</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Professional Summary -->
+    <section class="resume-section">
+      <h2 class="section-title">Professional Summary</h2>
+      <p class="summary-text">
+        Siva D is a Senior Software Engineer with around 8 years of experience designing, optimizing, and deploying scalable enterprise applications across financial services, healthcare, IoT, and cloud modernization programs. He specializes in Java, Spring Boot, microservices, React, Angular, REST/GraphQL APIs, Kafka, cloud platforms, Kubernetes, CI/CD, and distributed system modernization. He has worked on mission-critical platforms involving core banking modernization, healthcare data exchange, CAD visualization, fleet analytics, fraud monitoring, and clinical intelligence systems. His experience spans backend engineering, frontend development, cloud-native architecture, real-time data pipelines, API integrations, database optimization, secure authentication, observability, and Agile/Scrum delivery.
+      </p>
+    </section>
+
+    <!-- Core Competencies -->
+    <section class="resume-section">
+      <h2 class="section-title">Technical Skills</h2>
+      <div class="skills-container">
+        
+        <div class="skills-row">
+          <div class="skills-category">Frontend</div>
+          <div class="skills-list">
+            <span class="skill-badge">React.js</span>
+            <span class="skill-badge">Angular</span>
+            <span class="skill-badge">Vue.js</span>
+            <span class="skill-badge">JavaScript</span>
+            <span class="skill-badge">TypeScript</span>
+            <span class="skill-badge">HTML5</span>
+            <span class="skill-badge">CSS3</span>
+            <span class="skill-badge">Sass</span>
+            <span class="skill-badge">Bootstrap</span>
+            <span class="skill-badge">AJAX</span>
+            <span class="skill-badge">jQuery</span>
+            <span class="skill-badge">RxJS</span>
+          </div>
+        </div>
+
+        <div class="skills-row">
+          <div class="skills-category">Backend</div>
+          <div class="skills-list">
+            <span class="skill-badge">Java</span>
+            <span class="skill-badge">Scala</span>
+            <span class="skill-badge">Spring Boot</span>
+            <span class="skill-badge">Spring MVC</span>
+            <span class="skill-badge">Spring Security</span>
+            <span class="skill-badge">Hibernate</span>
+            <span class="skill-badge">Node.js</span>
+            <span class="skill-badge">Express.js</span>
+            <span class="skill-badge">Django</span>
+            <span class="skill-badge">Flask</span>
+            <span class="skill-badge">PHP</span>
+            <span class="skill-badge">Laravel</span>
+          </div>
+        </div>
+
+        <div class="skills-row">
+          <div class="skills-category">APIs & Security</div>
+          <div class="skills-list">
+            <span class="skill-badge">REST APIs</span>
+            <span class="skill-badge">GraphQL</span>
+            <span class="skill-badge">SOAP</span>
+            <span class="skill-badge">FHIR</span>
+            <span class="skill-badge">OAuth 2.0</span>
+            <span class="skill-badge">JWT</span>
+            <span class="skill-badge">API Gateway</span>
+            <span class="skill-badge">MFA</span>
+            <span class="skill-badge">JSON</span>
+            <span class="skill-badge">Swagger</span>
+            <span class="skill-badge">JAX-RS</span>
+          </div>
+        </div>
+
+        <div class="skills-row">
+          <div class="skills-category">Microservices & Broker</div>
+          <div class="skills-list">
+            <span class="skill-badge">Microservices</span>
+            <span class="skill-badge">Kafka</span>
+            <span class="skill-badge">Kafka Streams</span>
+            <span class="skill-badge">RabbitMQ</span>
+            <span class="skill-badge">ActiveMQ</span>
+            <span class="skill-badge">Event-Driven Architecture</span>
+          </div>
+        </div>
+
+        <div class="skills-row">
+          <div class="skills-category">Databases</div>
+          <div class="skills-list">
+            <span class="skill-badge">PostgreSQL</span>
+            <span class="skill-badge">MySQL</span>
+            <span class="skill-badge">Oracle</span>
+            <span class="skill-badge">DB2</span>
+            <span class="skill-badge">MongoDB</span>
+            <span class="skill-badge">DynamoDB</span>
+            <span class="skill-badge">Cassandra</span>
+            <span class="skill-badge">SQLite</span>
+            <span class="skill-badge">PL/SQL</span>
+          </div>
+        </div>
+
+        <div class="skills-row">
+          <div class="skills-category">Cloud & DevOps</div>
+          <div class="skills-list">
+            <span class="skill-badge">AWS (EC2, S3, Lambda, RDS, DynamoDB, IAM, CloudWatch)</span>
+            <span class="skill-badge">Azure (AKS, Functions, SQL, Blob, Key Vault)</span>
+            <span class="skill-badge">GCP / GKE</span>
+            <span class="skill-badge">Docker</span>
+            <span class="skill-badge">Kubernetes</span>
+            <span class="skill-badge">Terraform</span>
+            <span class="skill-badge">CloudFormation</span>
+            <span class="skill-badge">Helm</span>
+          </div>
+        </div>
+
+        <div class="skills-row">
+          <div class="skills-category">CI/CD & Testing</div>
+          <div class="skills-list">
+            <span class="skill-badge">Jenkins</span>
+            <span class="skill-badge">GitHub Actions</span>
+            <span class="skill-badge">Git</span>
+            <span class="skill-badge">JUnit</span>
+            <span class="skill-badge">Mockito</span>
+            <span class="skill-badge">Jest</span>
+            <span class="skill-badge">Cypress</span>
+            <span class="skill-badge">Prometheus & Grafana</span>
+            <span class="skill-badge">ELK Stack</span>
+            <span class="skill-badge">Splunk</span>
+            <span class="skill-badge">SonarQube</span>
+            <span class="skill-badge">OWASP</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Professional Experience -->
+    <section class="resume-section">
+      <h2 class="section-title">Professional Experience</h2>
+      
+      <div class="job-item">
+        <div class="job-header">
+          <div>
+            <div class="job-role">Sr. Software Engineer</div>
+            <div class="job-company">Credit Union of Atlanta</div>
+          </div>
+          <div class="job-meta">
+            <span class="job-duration">Dec 2024 – Present</span>
+            <span>Atlanta, GA</span>
+          </div>
+        </div>
+        <ul class="job-highlights">
+          <li>Built Angular/TypeScript member-facing digital banking interfaces.</li>
+          <li>Developed Spring Boot REST APIs for core banking services.</li>
+          <li>Migrated services to AWS EKS/Kubernetes for scalability and reliability.</li>
+          <li>Used AWS EC2, Lambda, S3, DynamoDB streams, and API Gateway.</li>
+          <li>Optimized PostgreSQL schemas and improved query performance by 35%.</li>
+          <li>Built CI/CD pipelines using Jenkins and Docker.</li>
+          <li>Created dashboards for member trends and operational insights.</li>
+          <li>Used Prometheus and Grafana to reduce downtime by 40%.</li>
+          <li>Applied SonarQube and OWASP scans for security compliance.</li>
+          <li>Participated in SAFe Agile ceremonies and mentored junior developers.</li>
+        </ul>
+      </div>
+
+      <div class="job-item">
+        <div class="job-header">
+          <div>
+            <div class="job-role">Sr. Software Engineer</div>
+            <div class="job-company">Centene Corporation</div>
+          </div>
+          <div class="job-meta">
+            <span class="job-duration">Feb 2024 – Nov 2024</span>
+            <span>St. Louis, MO</span>
+          </div>
+        </div>
+        <ul class="job-highlights">
+          <li>Built multi-tenant Spring Boot REST APIs following healthcare API governance.</li>
+          <li>Developed React modules for care coordination and high-risk member workflows.</li>
+          <li>Built dashboards for enrollment, claims, and utilization trends, improving accessibility by 30%.</li>
+          <li>Integrated FHIR R4/R5 endpoints and HL7-based data flows.</li>
+          <li>Optimized Spring Boot APIs and reduced latency by 25%.</li>
+          <li>Designed PostgreSQL and MongoDB schemas for 5TB+ health and claims data, increasing query performance by 40%.</li>
+          <li>Implemented OAuth2 and OpenID Connect with Okta for HIPAA/SOC2 compliance.</li>
+          <li>Created JUnit/Mockito tests with 85% code coverage.</li>
+          <li>Maintained Jenkins pipelines for Dockerized microservices on AWS EKS.</li>
+          <li>Used Terraform and CloudFormation to automate infrastructure, reducing manual deployment errors by 80%.</li>
+          <li>Reduced MTTR by 50% using Prometheus and Grafana.</li>
+          <li>Participated in SAFe Agile and mentored junior engineers.</li>
+        </ul>
+      </div>
+
+      <div class="job-item">
+        <div class="job-header">
+          <div>
+            <div class="job-role">Senior Software Engineer</div>
+            <div class="job-company">Conmet</div>
+          </div>
+          <div class="job-meta">
+            <span class="job-duration">Sep 2023 – Feb 2024</span>
+            <span>Vancouver, WA</span>
+          </div>
+        </div>
+        <ul class="job-highlights">
+          <li>Built React/TypeScript modules for 3D CAD visualization, rendering, and annotation.</li>
+          <li>Developed Spring Boot 3 microservices with REST and GraphQL APIs.</li>
+          <li>Designed MongoDB and Cassandra models for CAD file hierarchies and fleet time-series data.</li>
+          <li>Integrated Kafka event streams for real-time fleet telemetry.</li>
+          <li>Built OAuth2/JWT role-based access and MFA.</li>
+          <li>Created Node.js/Express geofencing and rule-engine services.</li>
+          <li>Containerized services with Docker and deployed on AWS EKS.</li>
+          <li>Used AWS S3, Lambda, Glue, and data lake workflows.</li>
+          <li>Built real-time ETL pipelines using Lambda.</li>
+          <li>Created GitHub Actions CI/CD workflows.</li>
+          <li>Used Redis for low-latency caching of CAD thumbnails and fleet KPI snapshots.</li>
+          <li>Used Prometheus, Grafana, ELK, and Splunk for monitoring.</li>
+          <li>Migrated RabbitMQ to Kafka for high-throughput telemetry ingestion.</li>
+        </ul>
+      </div>
+
+      <div class="job-item">
+        <div class="job-header">
+          <div>
+            <div class="job-role">Software Engineer</div>
+            <div class="job-company">HDFC Bank</div>
+          </div>
+          <div class="job-meta">
+            <span class="job-duration">Jul 2019 – Aug 2023</span>
+            <span>Mumbai, India</span>
+          </div>
+        </div>
+        <ul class="job-highlights">
+          <li>Built React 18 dashboards for real-time fraud monitoring using WebSocket and Server-Sent Events.</li>
+          <li>Developed Spring Boot 3 microservices with REST and GraphQL APIs.</li>
+          <li>Used Kafka for exactly-once event streaming into fraud/risk engines.</li>
+          <li>Designed Cassandra schemas for high-throughput transaction lineage.</li>
+          <li>Secured systems with OAuth2, JWT, MFA, and PCI DSS-aligned controls.</li>
+          <li>Used Redis caching for risk models and customer profiles.</li>
+          <li>Deployed microservices on Azure AKS with Docker and Terraform.</li>
+          <li>Built Jenkins CI/CD pipelines with JUnit, Mockito, Postman, and Cypress.</li>
+          <li>Used Prometheus, Grafana, ELK, and Splunk for monitoring.</li>
+          <li>Managed Oracle on Azure and MongoDB/Cosmos-style logging.</li>
+          <li>Built webhook callbacks for partner banks and payment networks.</li>
+          <li>Created Node.js/Express API Gateway with rate limiting and schema validation.</li>
+          <li>Used Azure Functions and API Management to reduce operational cost by 40% and improve scalability by 60%.</li>
+        </ul>
+      </div>
+
+      <div class="job-item">
+        <div class="job-header">
+          <div>
+            <div class="job-role">Associate Software Engineer</div>
+            <div class="job-company">Apollo Hospitals Enterprise Limited</div>
+          </div>
+          <div class="job-meta">
+            <span class="job-duration">Jan 2017 – Jun 2019</span>
+            <span>Chennai, India</span>
+          </div>
+        </div>
+        <ul class="job-highlights">
+          <li>Built React components for clinician-facing workflows.</li>
+          <li>Designed Spring Boot REST APIs for patient data retrieval and updates.</li>
+          <li>Participated in Agile two-week sprint planning with product owners and UX designers.</li>
+          <li>Deployed microservices to Google Kubernetes Engine using Docker, Helm, and Terraform.</li>
+          <li>Modeled Cassandra keyspaces for time-series vitals data.</li>
+          <li>Used Redis caching to reduce backend load.</li>
+          <li>Wrote JUnit and Mockito tests in GitHub Actions pipelines.</li>
+          <li>Built Prometheus metrics and Grafana dashboards.</li>
+          <li>Implemented Spring Security RBAC/ABAC to protect PHI.</li>
+          <li>Used Kafka Streams for real-time vitals and alert event processing.</li>
+          <li>Troubleshot production incidents and created root-cause analysis.</li>
+          <li>Authored API specs and documentation in Confluence and Swagger.</li>
+        </ul>
+      </div>
+
+    </section>
+
+    <!-- Key Projects -->
+    <section class="resume-section">
+      <h2 class="section-title">Selected Projects</h2>
+      <div class="projects-grid">
+        
+        <div class="project-card">
+          <h3 class="project-title">Core Transformation & Cloud Modernization</h3>
+          <div class="project-role">Sr. Software Engineer - Credit Union of Atlanta</div>
+          <p class="project-desc">Led legacy migration to Spring Boot microservices, Kafka data pipelines, and AWS/Azure Kubernetes deployments, cutting overall downtime by 40%.</p>
+          <div class="project-tags">
+            <span class="project-tag">Java</span>
+            <span class="project-tag">Spring Boot</span>
+            <span class="project-tag">AWS EKS</span>
+            <span class="project-tag">Kubernetes</span>
+            <span class="project-tag">Kafka</span>
+            <span class="project-tag">PostgreSQL</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <h3 class="project-title">Intelligent Health Data Exchange & Care Insights</h3>
+          <div class="project-role">Sr. Software Engineer - Centene Corporation</div>
+          <p class="project-desc">Engineered Spring Boot REST APIs and FHIR/HL7 sync endpoints handling 5TB+ healthcare data, reducing MTTR by 50% using Grafana.</p>
+          <div class="project-tags">
+            <span class="project-tag">Spring Boot</span>
+            <span class="project-tag">FHIR R4/R5</span>
+            <span class="project-tag">React</span>
+            <span class="project-tag">AWS EKS</span>
+            <span class="project-tag">PostgreSQL</span>
+            <span class="project-tag">Okta</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Certifications & Education -->
+    <div class="two-cols">
+      
+      <section class="resume-section">
+        <h2 class="section-title">Certifications</h2>
+        <div>
+          <div class="cert-item">
+            <svg class="cert-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+            Oracle Java SE 11 Developer
+          </div>
+          <div class="cert-item">
+            <svg class="cert-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+            Oracle Java SE 8 Programmer
+          </div>
+          <div class="cert-item">
+            <svg class="cert-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+            AWS Certified Developer
+          </div>
+          <div class="cert-item">
+            <svg class="cert-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+            Microsoft Certified Azure Fundamentals
+          </div>
+          <div class="cert-item">
+            <svg class="cert-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+            Oracle Cloud Infrastructure 2025 Certified Developer Professional
+          </div>
+          <div class="cert-item">
+            <svg class="cert-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+            Oracle Cloud Infrastructure 2025 Certified Generative AI Professional
+          </div>
+          <div class="cert-item">
+            <svg class="cert-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+            Microsoft Solution Architecture
+          </div>
+        </div>
+      </section>
+
+      <section class="resume-section">
+        <h2 class="section-title">Education</h2>
+        <div class="edu-item">
+          <h4>Master’s in Computer Science</h4>
+          <div class="edu-school">Kent State University</div>
+          <div class="edu-year">Alpharetta, GA (Resident Location)</div>
+        </div>
+      </section>
+
+    </div>
+
+  </div>
+
+</body>
+</html>
