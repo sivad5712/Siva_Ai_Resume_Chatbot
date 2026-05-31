@@ -104,7 +104,7 @@ export default function Footer() {
               {resumeData.name} &copy; {new Date().getFullYear()}
             </p>
             <p className="mt-1 text-[10px] opacity-75 font-normal">
-              Premium AI Resume Assistant &bull; Powered by Gemini 2.5 Flash API
+              Premium AI Resume Chatbot &bull; Powered by Gemini 2.5 Flash API
             </p>
           </div>
 

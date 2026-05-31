@@ -13,9 +13,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Siva AI Resume Assistant | Senior Software Engineer",
+  title: "Siva AI Resume Chatbot | Senior Software Engineer",
   description:
-    "Explore and query Siva's software engineering background directly using the custom AI Resume Assistant. Dynamic responses grounded on 8+ years of Java, Spring Boot, microservices, and cloud-native architecture.",
+    "Explore and query Siva's software engineering background directly using the custom AI Resume Chatbot. Dynamic responses grounded on 8+ years of Java, Spring Boot, microservices, and cloud-native architecture.",
   keywords: [
     "Siva",
     "Senior Software Engineer",

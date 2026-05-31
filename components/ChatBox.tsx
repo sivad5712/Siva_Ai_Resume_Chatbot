@@ -17,7 +17,7 @@ export default function ChatBox() {
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "assistant",
-      text: `Hi! I'm Siva D's AI Resume Assistant. Feel free to ask me about my Java, Spring Boot, microservices, cloud, healthcare, banking, projects, leadership, or role fit. How can I help you today?`,
+      text: `Hi! I'm Siva D's AI Resume Chatbot. Feel free to ask me about my Java, Spring Boot, microservices, cloud, healthcare, banking, projects, leadership, or role fit. How can I help you today?`,
       timestamp: new Date(),
     },
   ]);
@@ -193,7 +193,7 @@ export default function ChatBox() {
       setMessages([
         {
           role: "assistant",
-          text: `Hi! I'm Siva D's AI Resume Assistant. Feel free to ask me about my Java, Spring Boot, microservices, cloud, healthcare, banking, projects, leadership, or role fit. How can I help you today?`,
+          text: `Hi! I'm Siva D's AI Resume Chatbot. Feel free to ask me about my Java, Spring Boot, microservices, cloud, healthcare, banking, projects, leadership, or role fit. How can I help you today?`,
           timestamp: new Date(),
         },
       ]);
@@ -348,7 +348,7 @@ export default function ChatBox() {
                 <span className="absolute bottom-0 right-0 w-2 h-2 rounded-full bg-emerald-500 border border-white dark:border-zinc-950 animate-pulse" />
               </div>
               <div>
-                <h3 className="font-extrabold text-xs sm:text-sm leading-none text-foreground">{resumeData.name}&apos;s AI Resume Assistant</h3>
+                <h3 className="font-extrabold text-xs sm:text-sm leading-none text-foreground">{resumeData.name}&apos;s AI Resume Chatbot</h3>
                 <span className="text-[10px] text-muted-foreground font-semibold">Active & Grounded API</span>
               </div>
             </div>
@@ -391,7 +391,7 @@ export default function ChatBox() {
                   </h3>
 
                   <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed mb-6 font-medium">
-                    Hi! I am Siva D&apos;s AI Resume Assistant. I have full context of Siva&apos;s around 8 years of experience engineering high-scale Java / Spring Boot backend systems, HIPAA-regulated healthcare projects at Centene, and bank-grade fintech systems at HDFC Bank and Credit Union of Atlanta. 
+                    Hi! I am Siva D&apos;s AI Resume Chatbot. I have full context of Siva&apos;s around 8 years of experience engineering high-scale Java / Spring Boot backend systems, HIPAA-regulated healthcare projects at Centene, and bank-grade fintech systems at HDFC Bank and Credit Union of Atlanta. 
                   </p>
 
                   <div className="w-full border-t border-border/20 pt-5 flex items-center justify-center gap-4 text-[11px] font-semibold text-muted-foreground">

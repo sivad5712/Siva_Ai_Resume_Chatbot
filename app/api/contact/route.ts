@@ -73,9 +73,9 @@ export async function POST(req: NextRequest) {
       from: `"${name}" <${gmailUser}>`,
       replyTo: email,
       to: mailTo,
-      subject: `[Siva Resume Assistant] ${subject}`,
+      subject: `[Siva Resume Chatbot] ${subject}`,
       text: `
-New recruiter message from Siva AI Resume Assistant
+New recruiter message from Siva AI Resume Chatbot
 
 Recruiter Name:
 ${name}
@@ -90,7 +90,7 @@ Message:
 ${message}
 
 Sent from:
-Siva AI Resume Assistant - localhost / portfolio contact form
+Siva AI Resume Chatbot - localhost / portfolio contact form
       `,
     };
 

@@ -29,8 +29,8 @@ export default function Navbar() {
             <span className="font-bold text-xs sm:text-base tracking-tight text-foreground transition-colors duration-200 flex items-center">
               {resumeData.name} 
               <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent font-extrabold px-1.5 py-0.5 rounded-md bg-primary/5 border border-primary/10 text-[8px] sm:text-[10px] ml-1 sm:ml-1.5 align-middle select-none whitespace-nowrap">
-                <span className="inline sm:hidden">AI ASSISTANT</span>
-                <span className="hidden sm:inline">AI RESUME ASSISTANT</span>
+                <span className="inline sm:hidden">AI CHATBOT</span>
+                <span className="hidden sm:inline">AI RESUME CHATBOT</span>
               </span>
             </span>
           </div>

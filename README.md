@@ -1,6 +1,6 @@
-# Siva's AI Resume Assistant 🚀
+# Siva's AI Resume Chatbot 🚀
 
-A premium, recruiter-friendly AI Resume Assistant designed to showcase the software engineering background, architecture methodologies, and domain depth of Siva. Recruiters can query this interactive system using text or speech-to-text voice questions. The assistant answers as Siva in the first person, maintaining the tone of an expert 6-8+ years experienced Senior Software Engineer.
+A premium, recruiter-friendly AI Resume Chatbot designed to showcase the software engineering background, architecture methodologies, and domain depth of Siva. Recruiters can query this interactive system using text or speech-to-text voice questions. The chatbot answers as Siva in the first person, maintaining the tone of an expert 6-8+ years experienced Senior Software Engineer.
 
 ---
 
