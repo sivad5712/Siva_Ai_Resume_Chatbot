@@ -1,186 +1,323 @@
-# Siva D's AI Resume Chatbot
-> An enterprise-grade, high-performance interactive conversational platform showcasing the software engineering architecture, domain expertise, and enterprise experience of Siva D.
+# 🚀 Siva D's AI Resume Chatbot
 
-***
+> An AI-powered recruiter assistant that transforms a traditional resume into an interactive conversational experience using Google Gemini, Next.js, and TypeScript.
 
-<div align="left">
+<div align="center">
 
-![Live Site](https://img.shields.io/badge/Live_Deployment-siva--ai--resume--chatbot.vercel.app-000000?style=flat-square&logo=vercel&logoColor=white)
-![Next.js](https://img.shields.io/badge/Next.js_15-000000?style=flat-square&logo=next.js&logoColor=white)
-![TypeScript](https://img.shields.io/badge/TypeScript_5-000000?style=flat-square&logo=typescript&logoColor=white)
-![Google Gemini](https://img.shields.io/badge/Gemini_AI_API-000000?style=flat-square&logo=googlegemini&logoColor=white)
-![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS_v4-000000?style=flat-square&logo=tailwindcss&logoColor=white)
+![Next.js](https://img.shields.io/badge/Next.js-15-black?style=for-the-badge&logo=next.js)
+![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?style=for-the-badge&logo=typescript)
+![Google Gemini](https://img.shields.io/badge/Google-Gemini_AI-orange?style=for-the-badge&logo=google)
+![Tailwind CSS](https://img.shields.io/badge/TailwindCSS-v4-38BDF8?style=for-the-badge&logo=tailwind-css)
+![Vercel](https://img.shields.io/badge/Deploy-Vercel-black?style=for-the-badge&logo=vercel)
 
 </div>
 
-***
+---
 
-## 🌐 Live Production Link
-Access the fully deployed interactive platform here:  
-👉 **[siva-ai-resume-chatbot.vercel.app](https://siva-ai-resume-chatbot.vercel.app/)**
+## 🌐 Live Demo
 
-***
+**Live Application**
 
-## 🏛️ Executive Summary
-
-This repository houses the production code for **Siva D's AI Resume Chatbot**, a high-end, responsive portfolio application designed specifically for recruiters, hiring managers, and technical architects. 
-
-Unlike traditional static portfolios, this platform integrates a advanced **large language model (LLM) pipeline** that represents Siva in the first person. It behaves as an expert conversational representative, fully grounded in verified details of Siva's ~8 years of experience engineering high-scale Java / Spring Boot backend systems, HIPAA-regulated healthcare engines, and bank-grade financial platforms.
+👉 https://siva-ai-resume-chatbot.vercel.app
 
 ---
 
-## 🗺️ System Architecture & Data Flow
+## 📖 Overview
 
-This diagram illustrates the comprehensive pipeline of a recruiter's question traveling from the frontend through the server security filters, generative model execution, failover routines, and the SVG rendering layers:
+Siva D's AI Resume Chatbot is a recruiter-focused AI portfolio platform that allows hiring managers, technical interviewers, and recruiters to interact with an intelligent assistant trained on verified professional experience, project accomplishments, technical expertise, certifications, and work authorization details.
+
+Instead of browsing a static resume, visitors can ask questions naturally and receive contextual, recruiter-friendly responses.
+
+### Example Questions
+
+```text
+Tell me about yourself.
+
+What projects have you worked on?
+
+Explain your Credit Union of Atlanta project.
+
+How did you use Kafka?
+
+What cloud platforms have you worked with?
+
+What is your work authorization?
+
+What rate are you expecting?
+
+Show me an architecture diagram.
+```
+
+---
+
+## ✨ Features
+
+- 🤖 AI-powered resume assistant using Google Gemini
+- 📚 Resume-grounded knowledge base
+- 🏗️ Dynamic Mermaid architecture diagrams
+- 🔄 Automatic Gemini model failover
+- 🎙️ Voice-enabled chat support
+- 📱 Fully responsive UI
+- 📩 Recruiter contact integration
+- 🔐 Privacy and security controls
+- 🚀 Serverless deployment on Vercel
+
+---
+
+## 🏗️ Architecture
+
+```mermaid
+flowchart LR
+
+A[Recruiter / Hiring Manager]
+--> B[Next.js Frontend]
+
+B --> C[Chat Interface]
+
+C --> D[Next.js API Route]
+
+D --> E[Resume Knowledge Base]
+
+E --> F[Prompt Builder]
+
+F --> G[Gemini 2.5 Flash]
+
+G -->|Success| H[AI Response]
+
+G -->|429 Rate Limit| I[Gemini 2.0 Flash]
+
+I --> H
+
+H --> J[Mermaid Renderer]
+
+J --> K[User Response]
+```
+
+---
+
+## 🔄 Request Flow
 
 ```mermaid
 sequenceDiagram
-    autonumber
-    actor Recruiter as Recruiter / User
-    participant UI as ChatBox Frontend
-    participant Server as Next.js API Route (/api/chat)
-    participant Primary as Gemini 2.5 Flash
-    participant Fallback as Gemini 2.0 Flash
 
-    Recruiter->>UI: Submit Question (Text / Voice)
-    UI->>Server: POST Request (Message & History)
-    Note over Server: Load Grounded Resume Context & Privacy Rules
-    Server->>Primary: Query Primary Model (gemini-2.5-flash)
-    
-    alt Primary Success (Status 200)
-        Primary-->>Server: Return Text / Mermaid Code
-        Server-->>UI: Send JSON Output
-        UI-->>Recruiter: Render Answer & Visual Flowchart
-    else Rate Limited (Status 429)
-        Server->>Server: Intercept 429 & Trigger Failover
-        Server->>Fallback: Query Fallback Model (gemini-2.0-flash)
-        alt Fallback Success
-            Fallback-->>Server: Return Text / Mermaid Code
-            Server-->>UI: Send JSON Output
-            UI-->>Recruiter: Render Answer & Visual Flowchart
-        else Both Rate Limited (Status 429)
-            Server-->>UI: Send 429 Rate-Limit JSON Payload
-            UI-->>Recruiter: Show Friendly Cooldown Banner (30s)
-        end
-    end
+actor Recruiter
+
+participant UI as Frontend
+participant API as API Route
+participant KB as Resume Knowledge Base
+participant Gemini as Google Gemini
+
+Recruiter->>UI: Ask Question
+UI->>API: POST Request
+API->>KB: Load Resume Context
+API->>Gemini: Generate Response
+Gemini-->>API: Return Answer
+API-->>UI: JSON Response
+UI-->>Recruiter: Display Answer
 ```
 
 ---
 
-## ⚙️ Core Engineering Highlights
+## 🛠️ Technology Stack
 
-### 1. Robust Grounded Context & System Prompting
-* **Strict Grounding Boundaries**: Configured with a highly structured knowledge database ([resumeKnowledge.ts](file:///Users/SivaD/Desktop/siva-ai-resume-assistant/src/data/resumeKnowledge.ts)) including project descriptions, quantitative metrics, technical toolsets, and contact channels.
-* **PII & Data Integrity Filters**: Implements custom regex filters inside the server-side controller to protect sensitive identity data (USCIS, EAD, SSN, Passport, or Date of Birth), returning a standardized security response if requested.
-* **Work Authorization & Rates Compliance**: Programmed to outline Siva's extensible F1 OPT-EAD status accurately (without claim of citizenship or permanent residency) and invite C2C/W2 rate discussions flexible around the preferred baseline of $65/hr – $70/hr.
-
-### 2. High-Capacity Model Failover Pipeline
-To prevent service interruptions due to Google's free tier rate constraints (`429 Too Many Requests`), the backend features a **dual-model failover system**:
-* **Primary Route**: Handles queries via `gemini-2.5-flash` for high-speed, cost-efficient, advanced completions.
-* **Fallback Route**: In the event of a primary 429 quota exception, the system automatically redirects the query to `gemini-2.0-flash` on an independent rate limit tier, seamlessly resolving the query without user impact.
-* **Graceful Exit**: If both endpoints are exhausted, the endpoint responds with a structured `429` status code, triggering an elegant, non-intrusive 30-second cooldown layout on the client.
-
-### 3. Inline System Architecture Visualization
-* **Dynamic Mermaid Compilation**: The chatbot detects technical requests asking for architectural designs and responds with valid Mermaid.js diagrams.
-* **Interactive Client-Side Engine**: The frontend captures Markdown code blocks marked as ````mermaid```` and renders them using a reactive SVG compiler.
-* **Control Actions**: Users are equipped with "Copy Diagram Code" and "Download as SVG" actions, enabling real-time engineering evaluations.
-
-### 4. Direct Mail Dispatcher with Native Fallback
-* **Transactional Email Routing**: Implements server-side **Nodemailer SMTP** forwarding to transmit recruiter inquiries directly to Siva's primary inbox (`sivad5712@gmail.com`).
-* **Active Status Verification**: The endpoint performs pre-flight status validation. If the server lacks valid SMTP variables, it yields an explicit `SMTP_MISSING` indicator.
-* **Graceful Client Fallback**: The client form captures this indicator and dynamically displays a premium Mailto link containing pre-populated fields (subject, recipient, and message contents) so the recruiter can submit their inquiry via their native mail application seamlessly.
+| Layer | Technology |
+|---------|------------|
+| Frontend | Next.js 15, React 19 |
+| Language | TypeScript |
+| Styling | Tailwind CSS |
+| AI | Google Gemini |
+| Backend | Next.js API Routes |
+| Diagrams | Mermaid.js |
+| Email | Nodemailer |
+| Deployment | Vercel |
 
 ---
 
-## 🛠️ Complete Technical Stack
+## 📂 Project Structure
 
-| Layer | Technology | Rationale |
-| :--- | :--- | :--- |
-| **Framework** | Next.js 15.2 (App Router) | Standard for high-speed React Server Components, server-side routes, and fast static generation. |
-| **Language** | TypeScript 5 | Strict typing to eliminate runtime null reference exceptions. |
-| **AI Integration** | Google Gemini API SDK | Low-latency inference, large context window, and robust system instructions. |
-| **Rendering** | React 19, Vanilla Three.js | Real-time WebGL particle system providing premium visuals without affecting main thread operations. |
-| **Diagrams Engine**| Mermaid.js (Client Component) | On-the-fly client compilation of SVG architecture diagrams. |
-| **Animations** | Framer Motion | Smooth, organic page transitions and micro-interactions. |
-| **Styling** | Tailwind CSS v4, Vanilla CSS | Minimal utility-first styling utilizing CSS variables for clean Dark/Light theme switching. |
-| **Mail Transport** | Nodemailer | Standard, secure Node.js transactional email delivery. |
+```text
+siva-ai-resume-chatbot/
 
----
-
-## 💻 Local Workspace Configuration
-
-Follow this guide to initialize, configure, and execute the repository locally on macOS:
-
-### Prerequisites
-* **Node.js**: Version 18.0.0 or higher is required. Confirm with:
-  ```bash
-  node -v
-  ```
-
-### Step 1: Clone & Dependency Installation
-1. Clone the repository and navigate to the project directory:
-   ```bash
-   cd ~/Desktop/siva-ai-resume-assistant
-   ```
-2. Install dependencies securely:
-   ```bash
-   npm install --legacy-peer-deps
-   ```
-   *(Note: The `--legacy-peer-deps` flag ensures full compatibility between Next.js 15, React 19, and modular dependencies).*
-
-### Step 2: Establish Local Environment Variables
-Create a `.env.local` configuration file in the project's root folder:
-```bash
-touch .env.local
+├── app/
+│   ├── api/
+│   │   └── chat/
+│   │       └── route.ts
+│   ├── page.tsx
+│   └── layout.tsx
+│
+├── src/
+│   ├── components/
+│   ├── data/
+│   │   └── resumeKnowledge.ts
+│   └── styles/
+│
+├── public/
+├── .env.local
+├── package.json
+├── tsconfig.json
+└── README.md
 ```
-Add the following operational parameters to the file:
+
+---
+
+## ⚙️ Environment Variables
+
+Create a `.env.local` file in the project root.
+
 ```env
-# Gemini API Key - Retrieve for free at: https://aistudio.google.com/
-GEMINI_API_KEY=your_actual_gemini_api_key
+GEMINI_API_KEY=your_gemini_api_key
 
-# Nodemailer App Parameters (Gmail SMTP)
-GMAIL_USER=sivad5712@gmail.com
-GMAIL_APP_PASSWORD=your_gmail_app_password
+GMAIL_USER=your_email@gmail.com
+GMAIL_APP_PASSWORD=your_app_password
 ```
-*(Note: `.env.local` is listed inside `.gitignore` to prevent any exposure of sensitive keys in version control).*
 
-### Step 3: Run the Development Server
-Execute the Next.js Turbopack compiler:
+Required:
+
+```env
+GEMINI_API_KEY
+```
+
+Optional:
+
+```env
+GMAIL_USER
+GMAIL_APP_PASSWORD
+```
+
+---
+
+## 💻 Local Development
+
+### Clone Repository
+
+```bash
+git clone https://github.com/sivad5712/Siva_Ai_Resume_Chatbot.git
+
+cd Siva_Ai_Resume_Chatbot
+```
+
+### Install Dependencies
+
+```bash
+npm install
+```
+
+### Run Application
+
 ```bash
 npm run dev
 ```
-Navigate to **[http://localhost:3000](http://localhost:3000)** in your web browser.
+
+Open:
+
+```text
+http://localhost:3000
+```
 
 ---
 
-## 🚢 Production Deployment
+## 🚀 Deployment
 
-This application is fully optimized for **Vercel** serverless hosting:
+The application is optimized for Vercel deployment.
 
-1. Install the Vercel CLI global command tool:
-   ```bash
-   npm install -g vercel
-   ```
-2. Run the deployment sequence inside the project directory:
-   ```bash
-   vercel
-   ```
-3. Set your production variables in the **Vercel Project Dashboard** under **Settings > Environment Variables**:
-   * `GEMINI_API_KEY`
-   * `GMAIL_USER`
-   * `GMAIL_APP_PASSWORD`
-4. Promote the deployment to production:
-   ```bash
-   vercel --prod
-   ```
+### Required Environment Variable
+
+```env
+GEMINI_API_KEY=your_gemini_api_key
+```
+
+### Deploy
+
+```bash
+vercel --prod
+```
 
 ---
 
-## 📞 Professional Contact Information
+## 🔒 Security Features
 
-Siva is actively interviewing for Contract (C2C/W2), contract-to-hire, and permanent roles throughout the United States. 
+The chatbot prevents disclosure of sensitive information including:
 
-* **Live Interactive Platform**: [siva-ai-resume-chatbot.vercel.app](https://siva-ai-resume-chatbot.vercel.app/)
-* **Email**: [sivad5712@gmail.com](mailto:sivad5712@gmail.com)
-* **Mobile**: [+1 (614) 664-9498](tel:+16146649498)
-* **GitHub Codebase**: [github.com/sivad5712/Siva_Ai_Resume_Chatbot](https://github.com/sivad5712/Siva_Ai_Resume_Chatbot)
+- SSN
+- Passport Numbers
+- USCIS Numbers
+- EAD Numbers
+- Driver License Numbers
+- Date of Birth
+
+Sensitive requests automatically return privacy-safe responses.
+
+---
+
+## 📈 Engineering Highlights
+
+### Resume Knowledge Engine
+
+Structured knowledge repository containing:
+
+- Professional Experience
+- Project History
+- Technical Skills
+- Certifications
+- Work Authorization
+- Rate Expectations
+- Architecture Diagrams
+
+### Gemini Failover Strategy
+
+Primary Model:
+
+```text
+gemini-2.5-flash
+```
+
+Fallback Model:
+
+```text
+gemini-2.0-flash
+```
+
+Automatically switches to the fallback model when rate limits occur.
+
+### Interactive Architecture Visualization
+
+Supports Mermaid.js diagrams directly inside chat responses for:
+
+- System Design
+- Microservices Architecture
+- Cloud Infrastructure
+- Event-Driven Systems
+- Data Flow Visualization
+
+---
+
+## 📞 Contact
+
+### Siva D
+
+📧 Email: sivad5712@gmail.com
+
+📱 Phone: +1 (614) 664-9498
+
+💻 GitHub: https://github.com/sivad5712
+
+🌐 Portfolio: https://siva-ai-resume-chatbot.vercel.app
+
+---
+
+## ⭐ Why This Project Matters
+
+This project demonstrates practical expertise in:
+
+- Full-Stack Engineering
+- AI Integration
+- Prompt Engineering
+- Java & Spring Boot Ecosystem
+- Microservices Architecture
+- Cloud-Native Development
+- API Design
+- Vercel Deployment
+- Modern Recruiter Experience Design
+
+It serves as both a professional portfolio and a production-ready AI application showcasing modern software engineering practices.
