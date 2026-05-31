@@ -1,117 +1,177 @@
-# Siva's AI Resume Chatbot 🚀
+# Siva D's AI Resume Chatbot 🚀
 
-A premium, recruiter-friendly AI Resume Chatbot designed to showcase the software engineering background, architecture methodologies, and domain depth of Siva. Recruiters can query this interactive system using text or speech-to-text voice questions. The chatbot answers as Siva in the first person, maintaining the tone of an expert 6-8+ years experienced Senior Software Engineer.
+[![Live Site](https://img.shields.io/badge/Live_Demo-siva--ai--resume--chatbot.vercel.app-6366f1?style=for-the-badge&logo=vercel&logoColor=white)](https://siva-ai-resume-chatbot.vercel.app/)
+[![Next.js](https://img.shields.io/badge/Next.js_15-black?style=for-the-badge&logo=next.js&logoColor=white)](https://nextjs.org/)
+[![Google Gemini](https://img.shields.io/badge/Gemini_AI-2.5_%26_2.0_Flash-4285F4?style=for-the-badge&logo=google-gemini&logoColor=white)](https://ai.google.dev/)
+[![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS_v4-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
+
+A premium, state-of-the-art interactive **AI Resume Chatbot** designed to showcase the extensive software engineering background, architectural expertise, and enterprise domain depth of Siva D (Senior Software Engineer with ~8 years of experience building high-scale Java / Spring Boot systems, healthcare platforms, and financial software).
+
+Recruiters and hiring managers can query this interactive system using text or speech-to-text voice inputs. The chatbot acts directly on Siva's behalf, answering in a warm, confident, and professional first-person tone, backed by real-time visualization of systems architecture.
+
+> 🌐 **Live URL**: [https://siva-ai-resume-chatbot.vercel.app/](https://siva-ai-resume-chatbot.vercel.app/)
 
 ---
 
-## 🛠️ Tech Stack & Features
+## 📸 Key Capabilities & Features
 
-* **Framework**: Next.js App Router (React 19, TypeScript)
-* **Styling**: Tailwind CSS v4 (Glassmorphism interfaces, smooth themes, custom scrollbars)
-* **Animations**: Framer Motion (Page triggers, micro-interactions, dashboard stagger reveals)
-* **3D Visuals**: Lightweight, interactive particle mesh using Vanilla Three.js
-* **LLM Engine**: Google Gemini API via the official `@google/generative-ai` SDK
-* **Speech to Text**: Built-in HTML5 Web Speech Recognition API
-* **Theme System**: Persisted Light/Dark theme configuration with system sync fallbacks
+### 1. Robust Grounded AI Reasoning
+* Powered by **Gemini 2.5 Flash** with an exhaustive professional context block containing verified experience, technical metrics, certifications, visa status, rate expectations, and recruiter references.
+* Strict compliance logic: Never fabricates information, handles professional rates with flexibility, and protects sensitive PII (SSNs, Passport numbers, DOB) with a secure privacy blocker.
+
+### 2. Visually Rendered Systems Architecture
+* Automatically compiles and renders interactive **Mermaid.js** system design flowcharts inline directly inside the conversation bubbles when queried about architecture.
+* Features clean interactive toolbar operations: **"Copy Code"** and **"Download as SVG"** for technical reviewers.
+
+### 3. Seamless Model Failover (Quota Guard)
+* Implements a smart multi-tier fallback architecture. If the primary model (`gemini-2.5-flash`) hits free tier rate limits (429), the server-side route seamlessly fails over to **`gemini-2.0-flash`** under a separate quota block to double daily capacity.
+* Graceful error boundaries show a friendly, polite cooldown warning rather than a standard server crash.
+
+### 4. Direct Recruiter Mail Dispatcher
+* **Server-Side SMTP Delivery**: Processes recruiter queries directly to Siva's primary inbox (`sivad5712@gmail.com`) using high-performance server-side Nodemailer.
+* **Smart Client-Side Fallback**: If SMTP is unconfigured locally, a custom Mailto button is dynamically rendered, pre-filling the recruiter’s native client with Siva's details so no message is ever lost.
+
+### 5. Highly Responsive Premium UI/UX
+* Renders a custom, transparent Glassmorphism design suspended over a responsive **3D Particle Mesh Background** powered by Three.js.
+* Fluid animations designed using Framer Motion with comprehensive mobile touch overrides, input placeholder adaptations, and complete Light/Dark theme storage.
+
+---
+
+## 🗺️ Architectural Flow
+
+The diagram below details the pipeline of a recruiter query traveling from the UI to the AI engine and the failover mechanism:
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor Recruiter as Recruiter / User
+    participant UI as ChatBox Frontend
+    participant Server as Next.js API Route (/api/chat)
+    participant Primary as Gemini 2.5 Flash
+    participant Fallback as Gemini 2.0 Flash
+
+    Recruiter->>UI: Submit Question (Text / Voice)
+    UI->>Server: POST Request (Message & History)
+    Note over Server: Load Grounded Resume Context & Privacy Rules
+    Server->>Primary: Query Primary Model (gemini-2.5-flash)
+    
+    alt Primary Success (Status 200)
+        Primary-->>Server: Return Text / Mermaid Code
+        Server-->>UI: Send JSON Output
+        UI-->>Recruiter: Render Answer & Visual Flowchart
+    else Rate Limited (Status 429)
+        Server->>Server: Intercept 429 & Trigger Failover
+        Server->>Fallback: Query Fallback Model (gemini-2.0-flash)
+        alt Fallback Success
+            Fallback-->>Server: Return Text / Mermaid Code
+            Server-->>UI: Send JSON Output
+            UI-->>Recruiter: Render Answer & Visual Flowchart
+        else Both Rate Limited (Status 429)
+            Server-->>UI: Send 429 Rate-Limit JSON Payload
+            UI-->>Recruiter: Show Friendly Cooldown Banner (30s)
+        end
+    end
+```
+
+---
+
+## 🛠️ Technology Stack
+
+| Layer | Technologies Used |
+| :--- | :--- |
+| **Frontend Framework** | Next.js 15 (App Router), React 19, TypeScript |
+| **Styling & Theme** | Tailwind CSS v4, Vanilla CSS, CSS Variables (Dark/Light mode) |
+| **Generative AI** | Google Gemini API, `@google/generative-ai` SDK |
+| **3D Rendering** | Three.js (WebGL particles/mesh) |
+| **Dynamic Diagrams** | Mermaid.js, SVG parsing engine |
+| **Animations** | Framer Motion (staggered cards, transitions) |
+| **SMTP Delivery** | Nodemailer, Secure Gmail SMTP App Passwords |
+| **Hosting & CI/CD** | Vercel, GitHub Actions |
 
 ---
 
 ## 💻 macOS Setup Guide
 
-Follow this guide to get the project running locally on your Mac.
+Follow these simple steps to run this project locally on your machine.
 
-### Step 1: Install Node.js (If not already installed)
+### Step 1: Install Node.js
 Next.js requires Node.js (v18.0.0 or higher recommended).
-1. **Option A (Homebrew)**: If you use Homebrew, open your macOS Terminal and run:
+1. **Using Homebrew**:
    ```bash
    brew install node
    ```
-2. **Option B (Node Website)**: Go to [nodejs.org](https://nodejs.org/), download the **LTS (Long Term Support)** installer for Mac, and double-click the `.pkg` file to install it.
-3. Confirm installation in your terminal:
+2. **Manual Installer**: Download the LTS installer directly from [nodejs.org](https://nodejs.org/).
+3. Verify your installation:
    ```bash
    node -v
    npm -v
    ```
 
-### Step 2: Open terminal and navigate to the project directory
-1. Open the **Terminal** app on your Mac (press `Cmd + Space`, type `Terminal`, and press `Enter`).
-2. Navigate to this project folder. For example, if it is saved on your desktop:
+### Step 2: Clone and Install Dependencies
+1. Open Terminal and navigate to the project folder:
    ```bash
    cd ~/Desktop/siva-ai-resume-assistant
    ```
+2. Install the required Node packages:
+   ```bash
+   npm install --legacy-peer-deps
+   ```
+   *(Note: `--legacy-peer-deps` guarantees clean integration with React 19 package definitions).*
 
-### Step 3: Install Project Dependencies
-Run the installation command using the terminal inside the project directory:
-```bash
-npm install --legacy-peer-deps
-```
-*(We use `--legacy-peer-deps` to ensure complete dependency compatibility with React 19).*
-
-### Step 4: Configure the Gemini API Key
-To power the recruiter chatbot, you must supply a Google Gemini API Key.
-1. Get a **free** Gemini API Key by visiting [Google AI Studio](https://aistudio.google.com/app/apikey) and signing in with your Google account.
-2. In the root of your project folder, create a new file named `.env.local` by running:
+### Step 3: Setup Environment Variables
+1. In the root of the project, create a secure local environment file:
    ```bash
    touch .env.local
    ```
-3. Open `.env.local` in your editor and add your API key like so:
+2. Open `.env.local` and add the following keys:
    ```env
+   # Google Gemini Credentials (Get free from https://aistudio.google.com/)
    GEMINI_API_KEY=your_actual_gemini_api_key_here
+
+   # Email SMTP Credentials (Gmail App Password)
+   GMAIL_USER=sivad5712@gmail.com
+   GMAIL_APP_PASSWORD=your_gmail_app_password_here
    ```
-   *(Note: `.env.local` is automatically listed in your `.gitignore` file, keeping your API key private and secure).*
+   *(Note: `.env.local` is listed inside `.gitignore` to protect your secrets from ever being committed).*
 
-### Step 5: Personalize Your Resume Data
-You can easily personalize all response contexts.
-1. Open the file [src/data/resume.ts](file:///Users/SivaD/Desktop/siva-ai-resume-assistant/src/data/resume.ts).
-2. Modify the structured objects (`skills`, `companies`, `projects`, `education`, `contact`).
-3. Paste the full raw text of your final resume inside the `rawResumeText` variable at the bottom. The Gemini AI uses this comprehensive block of text as its ultimate source of truth to answer recruiter questions.
-
-### Step 6: Start the Local Development Server
-Launch the server by running:
+### Step 4: Run the Local Dev Server
+Start the Next.js server in development mode:
 ```bash
 npm run dev
 ```
-Once started, open your browser and navigate to: **[http://localhost:3000](http://localhost:3000)**.
+Open **[http://localhost:3000](http://localhost:3000)** in your browser to view and interact with the chatbot!
 
 ---
 
-## ⚡ How to Test the Assistant
+## 🚀 How to Deploy to Vercel (Production)
 
-1. **Text Inputs**: Type standard questions like *"Explain your Spring Boot experience"* or *"Why should we hire you?"* in the chat box and press `Enter`.
-2. **Voice Inputs**: Click the **Microphone** icon. Allow browser permission if prompted. Speak your question. Your transcript will be loaded, and the query will be sent.
-3. **Suggested Questions**: Click on any of the categorized tabs beneath the chat card (e.g. *Projects*, *Cloud*, *Skill-Gap Check*) and select a pre-populated question to trigger a rapid response.
-4. **Theme Shifts**: Click the sun/moon icon in the sticky navbar to verify that the ambient Three.js colors, card highlights, and grid overlays transform smoothly.
+Deploy your portfolio to production globally in minutes:
 
----
-
-## 🚀 Deploy to Vercel (Production)
-
-Deploying this site is incredibly easy with **Vercel** (the creators of Next.js):
 1. Create a free account at [vercel.com](https://vercel.com).
-2. Install the Vercel CLI on your Mac:
+2. Install the Vercel CLI globally:
    ```bash
    npm install -g vercel
    ```
-3. Run the deployment command from the project root:
+3. Run the initial deployment from the project directory:
    ```bash
    vercel
    ```
-   Follow the prompts to link the project.
-4. **CRITICAL**: Go to your Vercel Project Dashboard, navigate to **Settings > Environment Variables**, and add your:
-   * **Key**: `GEMINI_API_KEY`
-   * **Value**: *[your_gemini_api_key]*
-5. Deploy to production:
+4. **Configure Environment Variables**:
+   * Navigate to your Vercel Project Dashboard.
+   * Go to **Settings > Environment Variables**.
+   * Add `GEMINI_API_KEY`, `GMAIL_USER`, and `GMAIL_APP_PASSWORD` with your real keys.
+5. Publish live to production:
    ```bash
    vercel --prod
    ```
 
 ---
 
-## 🔍 Common Errors & Troubleshooting
+## 📞 Professional Contact Details
 
-* **Issue: Chatbot says "missing API key"**
-  * *Fix*: Verify you created a `.env.local` file in the root of the project (not inside `app/` or `src/`) and that the variable name is exactly `GEMINI_API_KEY` with no spaces. Restart the npm server (`Ctrl + C` then `npm run dev`) so Next.js reloads the environment.
-* **Issue: "TypeError: Cannot read properties of null (reading 'webkitSpeechRecognition')"**
-  * *Fix*: The Web Speech API is natively supported in modern Chrome, Safari, and Edge. If you are testing in a browser or shell preview that does not support it, a gracious warning banner is displayed.
-* **Issue: WebGL errors on older Macs**
-  * *Fix*: The 3D particle system handles failures gracefully. If WebGL is not enabled or supported, the system falls back onto a beautiful ambient glow background.
+Siva is open to Contract, W2, C2C, and Full-Time engineering roles across the United States. 
+
+* **Portfolio Website**: [siva-ai-resume-chatbot.vercel.app](https://siva-ai-resume-chatbot.vercel.app/)
+* **Email**: [sivad5712@gmail.com](mailto:sivad5712@gmail.com)
+* **Phone**: [+1 (614) 664-9498](tel:+16146649498)
+* **GitHub Repository**: [github.com/sivad5712/Siva_Ai_Resume_Chatbot](https://github.com/sivad5712/Siva_Ai_Resume_Chatbot)
