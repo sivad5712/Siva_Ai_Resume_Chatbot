@@ -113,38 +113,25 @@ This sequence diagram illustrates how a user inquiry is handled by the server, d
 
 ```mermaid
 sequenceDiagram
-    autonumber
-    actor Recruiter as Recruiter / Hiring Manager
-    participant UI as ChatBox Frontend
-    participant Server as Next.js API Route (/api/chat)
-    participant Primary as Gemini 2.5 Flash
-    participant Fallback as Gemini 2.0 Flash
+    actor User as Recruiter / Hiring Manager
+    participant UI as Chatbot Frontend
+    participant API as Next.js API Route
+    participant Gemini as Google Gemini API
 
-    Recruiter->>UI: Input Question (Text / Voice Speech)
-    UI->>Server: POST Request (Input Message & Conversation History)
-    Note over Server: Load Grounded Context & Apply PII Filter rules
-    
-    rect rgb(240, 240, 240)
-        Note over Server: Server-side model processing loop
-        Server->>Primary: Query Primary Model (gemini-2.5-flash)
-        alt Primary Success (Status 200)
-            Primary-->>Server: Return Text / Mermaid Code
-            Server-->>UI: Return JSON Response
-            UI-->>Recruiter: Display Text & Render Inline SVG Architecture Diagrams
-        else Primary Quota Exceeded (Status 429)
-            Note over Server: Intercept 429 exception & redirect connection
-            Server->>Fallback: Query Fallback Model (gemini-2.0-flash)
-            alt Fallback Success (Status 200)
-                Fallback-->>Server: Return Text / Mermaid Code
-                Server-->>UI: Return JSON Response
-                UI-->>Recruiter: Display Text & Render Inline SVG Architecture Diagrams
-            else Both Models Rate Limited (Status 429)
-                Fallback-->>Server: Return 429 Quota Exceeded Response
-                Server-->>UI: Return Rate-Limit Status Payload
-                UI-->>Recruiter: Trigger 30-Second Chat Cooldown Layout
-            end
-        end
+    User->>UI: Ask Question (Text or Voice)
+    UI->>API: Send Request (POST /api/chat)
+    Note over API: Load Grounded Context & Apply PII Filter
+
+    API->>Gemini: Query Primary Model (gemini-2.5-flash)
+
+    alt Primary Rate Limited (429 Status)
+        Note over API: Seamless Quota Fallback
+        API->>Gemini: Query Fallback Model (gemini-2.0-flash)
     end
+
+    Gemini-->>API: Return Answer / Diagrams
+    API-->>UI: Send JSON Response
+    UI-->>User: Display Response & Render Architecture Flowcharts
 ```
 
 ---
