@@ -29,50 +29,45 @@ Unlike traditional static portfolios, this platform integrates a advanced **larg
 
 ---
 
-## ⚙️ Core Architecture & Engineering Highlights
+## 🗺️ System Architecture & Data Flow
 
+This diagram illustrates the comprehensive pipeline of a recruiter's question traveling from the frontend through the server security filters, generative model execution, failover routines, and the SVG rendering layers:
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor Recruiter as Recruiter / User
+    participant UI as ChatBox Frontend
+    participant Server as Next.js API Route (/api/chat)
+    participant Primary as Gemini 2.5 Flash
+    participant Fallback as Gemini 2.0 Flash
+
+    Recruiter->>UI: Submit Question (Text / Voice)
+    UI->>Server: POST Request (Message & History)
+    Note over Server: Load Grounded Resume Context & Privacy Rules
+    Server->>Primary: Query Primary Model (gemini-2.5-flash)
+    
+    alt Primary Success (Status 200)
+        Primary-->>Server: Return Text / Mermaid Code
+        Server-->>UI: Send JSON Output
+        UI-->>Recruiter: Render Answer & Visual Flowchart
+    else Rate Limited (Status 429)
+        Server->>Server: Intercept 429 & Trigger Failover
+        Server->>Fallback: Query Fallback Model (gemini-2.0-flash)
+        alt Fallback Success
+            Fallback-->>Server: Return Text / Mermaid Code
+            Server-->>UI: Send JSON Output
+            UI-->>Recruiter: Render Answer & Visual Flowchart
+        else Both Rate Limited (Status 429)
+            Server-->>UI: Send 429 Rate-Limit JSON Payload
+            UI-->>Recruiter: Show Friendly Cooldown Banner (30s)
+        end
+    end
 ```
-                          ┌────────────────────────┐
-                          │  Recruiter / User UI   │
-                          └───────────┬────────────┘
-                                      │
-                                      ▼ [POST Request]
-                       ┌──────────────────────────────┐
-                       │  Next.js API Route handler   │
-                       └──────────────┬───────────────┘
-                                      │
-                       ┌──────────────┴──────────────┐
-                       ▼                             ▼
-         [Grounding Resume Context]           [Security Blockers]
-         - Core Java / Spring Boot            - PII Redaction Filter
-         - HIPAA/Fintech Compliance           - strict Visa Rules
-         - Project Metrics Data               - Rate Flex Guidelines
-                       │                             │
-                       └──────────────┬──────────────┘
-                                      │
-                                      ▼
-                      ┌───────────────────────────────┐
-                      │    Gemini API Engine Core     │
-                      └───────────────┬───────────────┘
-                                      │
-              ┌───────────────────────┴───────────────────────┐
-              │ [Success Status 200]                          │ [Failure Status 429]
-              ▼                                               ▼
-     ┌──────────────────┐                           ┌──────────────────┐
-     │ gemini-2.5-flash │                           │ gemini-2.0-flash │
-     └────────┬─────────┘                           └────────┬─────────┘
-              │                                              │
-              └───────────────────────┬──────────────────────┘
-                                      │ [Response Payload]
-                                      ▼
-                        ┌────────────────────────────┐
-                        │    Framer Motion UI Layer  │
-                        ├────────────────────────────┤
-                        │ - Inline Mermaid Rendering │
-                        │ - Live SVG Downloader      │
-                        │ - SMTP / Mailto Fallback   │
-                        └────────────────────────────┘
-```
+
+---
+
+## ⚙️ Core Engineering Highlights
 
 ### 1. Robust Grounded Context & System Prompting
 * **Strict Grounding Boundaries**: Configured with a highly structured knowledge database ([resumeKnowledge.ts](file:///Users/SivaD/Desktop/siva-ai-resume-assistant/src/data/resumeKnowledge.ts)) including project descriptions, quantitative metrics, technical toolsets, and contact channels.
