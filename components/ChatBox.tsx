@@ -17,7 +17,7 @@ export default function ChatBox() {
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "assistant",
-      text: `Hi! This is my AI Resume Chatbot acting on my behalf. If you'd like to ask any questions about my experience, projects, or background before reaching out, please feel free to ask!`,
+      text: `This AI Resume Chatbot acts on my behalf to provide immediate details regarding my technical background and professional experience. Please feel free to ask any questions before we connect.`,
       timestamp: new Date(),
     },
   ]);
@@ -193,7 +193,7 @@ export default function ChatBox() {
       setMessages([
         {
           role: "assistant",
-          text: `Hi! This is my AI Resume Chatbot acting on my behalf. If you'd like to ask any questions about my experience, projects, or background before reaching out, please feel free to ask!`,
+          text: `This AI Resume Chatbot acts on my behalf to provide immediate details regarding my technical background and professional experience. Please feel free to ask any questions before we connect.`,
           timestamp: new Date(),
         },
       ]);
@@ -391,7 +391,7 @@ export default function ChatBox() {
                   </h3>
 
                   <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed mb-6 font-medium">
-                    Hi! This is my AI Resume Chatbot acting on my behalf. If you&apos;d like to ask any questions about my experience, projects, or background before reaching out, please feel free to ask!
+                    This AI Resume Chatbot acts on my behalf to provide immediate details regarding my technical background and professional experience. Please feel free to ask any questions before we connect.
                   </p>
                 </motion.div>
               ) : (
