@@ -19,7 +19,7 @@
 
 **Live Production Link**
 
-👉 **[siva-ai-resume-chatbot.vercel.app](https://siva-ai-resume-chatbot.vercel.app)**
+**[siva-ai-resume-chatbot.vercel.app](https://siva-ai-resume-chatbot.vercel.app)**
 
 ---
 
