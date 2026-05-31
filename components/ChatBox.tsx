@@ -17,7 +17,7 @@ export default function ChatBox() {
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "assistant",
-      text: `Hi! I'm Siva D's AI Resume Chatbot. Feel free to ask me about my Java, Spring Boot, microservices, cloud, healthcare, banking, projects, leadership, or role fit. How can I help you today?`,
+      text: `Hi! This is my AI Resume Chatbot acting on my behalf. If you'd like to ask any questions about my experience, projects, or background before reaching out, please feel free to ask!`,
       timestamp: new Date(),
     },
   ]);
@@ -193,7 +193,7 @@ export default function ChatBox() {
       setMessages([
         {
           role: "assistant",
-          text: `Hi! I'm Siva D's AI Resume Chatbot. Feel free to ask me about my Java, Spring Boot, microservices, cloud, healthcare, banking, projects, leadership, or role fit. How can I help you today?`,
+          text: `Hi! This is my AI Resume Chatbot acting on my behalf. If you'd like to ask any questions about my experience, projects, or background before reaching out, please feel free to ask!`,
           timestamp: new Date(),
         },
       ]);
@@ -391,20 +391,8 @@ export default function ChatBox() {
                   </h3>
 
                   <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed mb-6 font-medium">
-                    Hi! I am Siva D&apos;s AI Resume Chatbot. I have full context of Siva&apos;s around 8 years of experience engineering high-scale Java / Spring Boot backend systems, HIPAA-regulated healthcare projects at Centene, and bank-grade fintech systems at HDFC Bank and Credit Union of Atlanta. 
+                    Hi! This is my AI Resume Chatbot acting on my behalf. If you&apos;d like to ask any questions about my experience, projects, or background before reaching out, please feel free to ask!
                   </p>
-
-                  <div className="w-full border-t border-border/20 pt-5 flex items-center justify-center gap-4 text-[11px] font-semibold text-muted-foreground">
-                    <span className="flex items-center gap-1">
-                      <ShieldCheck className="w-3.5 h-3.5 text-emerald-500" />
-                      Grounded in verified data
-                    </span>
-                    <span className="w-1 h-1 rounded-full bg-border" />
-                    <span className="flex items-center gap-1">
-                      <Sparkles className="w-3.5 h-3.5 text-primary" />
-                      Fast answers via Gemini 2.5
-                    </span>
-                  </div>
                 </motion.div>
               ) : (
                 /* DYNAMIC MESSAGE CHAT LIST WRAPPED IN A SINGLE MOTION CONTAINER */
