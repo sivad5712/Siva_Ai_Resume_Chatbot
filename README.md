@@ -69,40 +69,17 @@ This flowchart outlines the decoupled layers of the chatbot system, illustrating
 
 ```mermaid
 flowchart TD
-    subgraph Client Tier [Interactive Client Layer]
-        A[Recruiter User] -->|Speech / Text Input| B(Chat Interface React View)
-        B -->|Dynamic Themes| C{Theme Manager}
-        B -->|Visual WebGL Mesh| D[Three.js 3D Particle Canvas]
-    end
-
-    subgraph Controller Tier [Serverless Routing Layer]
-        B -->|JSON API POST| E[Next.js Serverless Route /api/chat]
-        E -->|Privacy Check| F{PII Redaction Guard}
-        F -->|Flagged Sensitive| G[Standard Security Warning]
-        F -->|Passed Clean| H[Grounded Prompt Compiler]
-    end
-
-    subgraph Knowledge Base [Grounded Resume Context]
-        I[(resumeKnowledge.ts)] -->|Read Structured Schema| H
-    end
-
-    subgraph LLM Routing Tier [High-Capacity Generative Pipeline]
-        H -->|Execute Inference| J{Active Model Dispatcher}
-        J -->|Primary Model| K[Gemini 2.5 Flash]
-        J -->|429 Rate Limit Fallback| L[Gemini 2.0-Flash]
-    end
-
-    subgraph Dynamic Response Layer [Dynamic UI Compile]
-        K -->|Success Response| M[Markdown Parser]
-        L -->|Success Response| M
-        M -->|Mermaid Script| N[Mermaid.js Interactive Compiler]
-        M -->|Standard Text| O[Framer Motion Message Bubbles]
-        N -->|Compile Visual Flows| P[Interactive SVG Renderer & SVG Exporter]
-    end
-
-    G -->|Return Payload| B
-    O -->|Render Bubble| B
-    P -->|Render System Flow| B
+    A[Recruiter / User Input] -->|Text or Speech| B[Next.js Frontend]
+    B -->|API POST Request| C[Server API Route]
+    C -->|Grounding Context| D[(Resume Knowledge Base)]
+    C -->|PII Validation Guard| E{Privacy Filter}
+    E -->|Approved| F{Model Router}
+    F -->|Primary Model| G[Gemini 2.5 Flash]
+    F -->|Fallback Model| H[Gemini 2.0 Flash]
+    G -->|Generate Answer| I[Framer Motion UI]
+    H -->|Generate Answer| I
+    I -->|Mermaid Script| J[Mermaid.js Renderer]
+    J -->|Render SVG Flowcharts| B
 ```
 
 ---
