@@ -327,11 +327,11 @@ ${resumeContext}
         /429|quota|rate limit|too many requests/i.test(primaryError?.message || "");
 
       if (isRateLimit) {
-        console.warn("Primary model (gemini-2.5-flash) rate-limited. Seamlessly falling back to gemini-1.5-flash...");
+        console.warn("Primary model (gemini-2.5-flash) rate-limited. Seamlessly falling back to gemini-2.0-flash...");
         try {
           // Initialize fallback model
           const fallbackModel = genAI.getGenerativeModel({
-            model: "gemini-1.5-flash",
+            model: "gemini-2.0-flash",
             systemInstruction: systemInstruction,
           });
 
