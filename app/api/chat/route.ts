@@ -315,9 +315,44 @@ ${resumeContext}
       },
     });
 
-    // 8. Generate content
-    const result = await chat.sendMessage(message.trim());
-    const responseText = result.response.text();
+    // 8. Generate content with seamless fallback failover if rate-limited (429)
+    let responseText = "";
+    try {
+      const result = await chat.sendMessage(message.trim());
+      responseText = result.response.text();
+    } catch (primaryError: any) {
+      const isRateLimit =
+        primaryError?.status === 429 ||
+        primaryError?.statusCode === 429 ||
+        /429|quota|rate limit|too many requests/i.test(primaryError?.message || "");
+
+      if (isRateLimit) {
+        console.warn("Primary model (gemini-2.5-flash) rate-limited. Seamlessly falling back to gemini-1.5-flash...");
+        try {
+          // Initialize fallback model
+          const fallbackModel = genAI.getGenerativeModel({
+            model: "gemini-1.5-flash",
+            systemInstruction: systemInstruction,
+          });
+
+          const fallbackChat = fallbackModel.startChat({
+            history: geminiHistory,
+            generationConfig: {
+              maxOutputTokens: 2000,
+              temperature: 0.4,
+            },
+          });
+
+          const fallbackResult = await fallbackChat.sendMessage(message.trim());
+          responseText = fallbackResult.response.text();
+        } catch (fallbackError) {
+          console.error("Both primary and fallback models rate-limited.");
+          throw fallbackError; // Escalate if both are rate-limited
+        }
+      } else {
+        throw primaryError; // Rethrow other server errors
+      }
+    }
 
     return NextResponse.json({ answer: responseText });
   } catch (error: any) {
