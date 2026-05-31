@@ -1,4 +1,4 @@
-# 🚀 Siva D's AI Resume Chatbot
+#  AI Resume Chatbot
 
 > An enterprise-grade conversational representative engineered to translate professional experience, system design methodologies, and domain depth into a high-speed interactive experience using Google Gemini, Next.js, and TypeScript.
 
